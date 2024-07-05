@@ -331,7 +331,7 @@ html {
   .colors,
   .sizes {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .color {
@@ -363,10 +363,33 @@ html {
     font-weight: 600;
     cursor: pointer;
   }
+  .cart-add {
+    float: right;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
   
   .productButton:hover {
     background-color: white;
     color: black;
+    float: right;
+    padding: 9px 18px;
+    font-weight: 550;
+    position: obsolute;
+    cursor: pointer;
+  }
+
+  .cart-add:hover {
+    float: right;
+    padding: 9px 20px;
+    background-color: white;
+    color: black;
+    font-weight: 550;
+    position: obsolute;
+    cursor: pointer;
   }
   
   .gallery {
@@ -402,6 +425,11 @@ html {
     width: 100%;
     height: 500px;
   }
+
+  .nsImg:hover {
+    width: 98%;
+    height: 480px;
+  }
   
   .nsTitle {
     font-size: 40px;
@@ -410,6 +438,14 @@ html {
   .nsButton {
     padding: 15px;
     font-weight: 600;
+    border-radius: 15%;
+    cursor: pointer;
+  }
+
+  .nsButton:hover {
+    padding: 13px;
+    font-weight: 580;
+    border-radius: 15%;
     cursor: pointer;
   }
   
@@ -465,6 +501,7 @@ html {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    cursor: pointer;
   }
   
   .copyright{
@@ -585,5 +622,76 @@ html {
       padding: 20px;
     }
   }
- 
-  
+
+  /* Add this to your existing CSS */
+#cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+#cart h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+#cartItems {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+#cartCount {
+  font-size: 18px;
+  color: red;
+  font-weight: bold;
+}
+
+.cart {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  width: 300px;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.cart-header {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cart-total {
+  font-size: 18px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.cart-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
