@@ -47,7 +47,6 @@ function signIn() {
         if (storedUser.mail == enteredemail && storedUser.pwd == enteredPassword) {
             console.log('Sign in successful');
             alert('Sign in successful!');
-       
             window.open("htmlfile.html");
         } else {
             console.log('Invalid username or password');

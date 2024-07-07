@@ -1,5 +1,6 @@
 const wrapper = document.querySelector(".sliderWrapper");
 const menuItems = document.querySelectorAll(".menuItem");
+const check_acc = document.querySelector('.payButton');
 
 const products = [
   {
@@ -204,3 +205,9 @@ function clearCart() {
 
 updateCartUI();
 
+
+check_acc.addEventListener('click',()=>
+{
+  alert('Order placed successfully...!');
+  console.log("success")
+});
