@@ -3,7 +3,7 @@
 
  # Nike Store
 
-An eCommerce website for selling Nike products. The website includes features like a product slider, product details, search functionality, and a shopping cart.
+An EcommerceStore.com website for selling Nike products. The website includes features like a product slider, product details, search functionality, and a shopping cart.
 
 # Table of Contents
 
