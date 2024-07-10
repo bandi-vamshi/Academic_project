@@ -695,3 +695,13 @@ html {
   justify-content: space-between;
   margin-top: 20px;
 }
+
+.about
+{
+  display: flex;
+  align-content: start;
+  margin-right: 50px;
+  cursor: pointer;
+  color: lightgray;
+  font-weight: 400;
+}

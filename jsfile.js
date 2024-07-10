@@ -205,9 +205,18 @@ function clearCart() {
 
 updateCartUI();
 
-
 check_acc.addEventListener('click',()=>
 {
   alert('Order placed successfully...!');
   console.log("success")
 });
+
+document.querySelector("#contactus").addEventListener('click',()=>
+{
+  window.open("./contactpage/contact.html")
+})
+document.querySelector("#aboutus").addEventListener('click',()=>
+{
+  window.open("./aboutus/aboutus.html")
+})
+
