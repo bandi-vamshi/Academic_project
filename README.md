@@ -1,4 +1,4 @@
-﻿ ### eCommerce website ###
+ ### eCommerce website ###
  EcommerceStore.com
 
  # Nike Store
@@ -17,7 +17,7 @@ An EcommerceStore.com website for selling Nike products. The website includes fe
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
-- [About](#About us)
+- [About](#about)
 
 # Demo
 
@@ -103,4 +103,3 @@ Learn more about our mission, vision, and team on the About Us page.
 Vamshi - [your-email@example.com](mailto:your-email@example.com)
 
 Project Link: [https://github.com/bandi-vamshi/Academic_project.git](https://bandi-vamshi.github.io/Academic_project/)
-

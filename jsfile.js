@@ -131,6 +131,7 @@ currentProductSizes.forEach((size, index) => {
 const productButton = document.querySelector(".productButton");
 const payment = document.querySelector(".payment");
 const close = document.querySelector(".close");
+const cartpage=document.getElementById("cartpage")
 
 productButton.addEventListener("click", () => {
   payment.style.display = "flex";
@@ -139,78 +140,6 @@ productButton.addEventListener("click", () => {
 close.addEventListener("click", () => {
   payment.style.display = "none";
 });
-
-
-
-let cart = [];
-
-function addToCart(productName, price) {
-    const item = cart.find(product => product.name === productName);
-    if (item) {
-        item.quantity += 1;
-    } else {
-        cart.push({ name: productName, price: price, quantity: 1 });
-    }
-    updateCartUI();
-}
-
-function updateCartUI() {
-    const cartContainer = document.createElement('div');
-    cartContainer.classList.add('cart');
-
-    const cartHeader = document.createElement('div');
-    cartHeader.classList.add('cart-header');
-    cartHeader.innerText = 'Shopping Cart';
-    cartContainer.appendChild(cartHeader);
-
-    const cartItems = document.createElement('div');
-    cartItems.classList.add('cart-items');
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <span>${item.name} x${item.quantity}</span>
-            <span>Rs ${item.price * item.quantity}</span>
-        `;
-        cartItems.appendChild(cartItem);
-    });
-    cartContainer.appendChild(cartItems);
-
-    const cartTotal = document.createElement('div');
-    cartTotal.classList.add('cart-total');
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    cartTotal.innerText = `Total: Rs ${total}`;
-    cartContainer.appendChild(cartTotal);
-
-    const cartButtons = document.createElement('div');
-    cartButtons.classList.add('cart-buttons');
-    const checkoutButton = document.createElement('button');
-    checkoutButton.innerText = 'Checkout';
-    checkoutButton.onclick = () => alert('Checkout feature coming soon!');
-    cartButtons.appendChild(checkoutButton);
-
-    const clearButton = document.createElement('button');
-    clearButton.innerText = 'Clear Cart';
-    clearButton.onclick = clearCart;
-    cartButtons.appendChild(clearButton);
-    cartContainer.appendChild(cartButtons);
-
-    document.body.appendChild(cartContainer);
-}
-
-function clearCart() {
-    cart = [];
-    updateCartUI();
-}
-
-updateCartUI();
-
-check_acc.addEventListener('click',()=>
-{
-  alert('Order placed successfully...!');
-  console.log("success")
-});
-
 document.querySelector("#contactus").addEventListener('click',()=>
 {
   window.open("./contactpage/contact.html")
@@ -219,4 +148,20 @@ document.querySelector("#aboutus").addEventListener('click',()=>
 {
   window.open("./aboutus/aboutus.html")
 })
+document.querySelector("#cart-page").addEventListener('click',()=>
+{
+   window.open("./cartpage/cart.html")
+})
 
+products.forEach(values=>{
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if(values.title===productName){
+        cart.push({ name: values.title, price: values.price,});
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Product added to cart');
+    
+}
+}
+)
