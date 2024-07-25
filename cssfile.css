@@ -135,9 +135,21 @@ html {
   
   .buyButton {
     position: absolute;
-    top: 50%;
-    right: 10%;
-    font-size: 30px;
+    top: 60%;
+    right: 12%;
+    font-size: 20px;
+    font-weight: 900;
+    color: white;
+    border: 1px solid gray;
+    background-color: black;
+    z-index: 1;
+    cursor: pointer;
+  }
+  .cartbutton {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    font-size: 20px;
     font-weight: 900;
     color: white;
     border: 1px solid gray;
@@ -147,6 +159,10 @@ html {
   }
   
   .buyButton:hover {
+    background-color: white;
+    color: black;
+  }
+  .cartbutton:hover {
     background-color: white;
     color: black;
   }

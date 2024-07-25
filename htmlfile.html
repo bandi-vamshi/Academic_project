@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&family=Nunito&family=Palanquin+Dark:wght@500&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="cssfile.css">
+    <link rel="stylesheet" href="">
     <title>Nike Store</title>
     <link
             rel="icon"
@@ -52,15 +53,18 @@
                 <h2 class="sliderPrice">Rs.1999</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
+                    <button class="cartbutton" onclick="addToCart('Air Force', '119','Classic style, comfortable fit-a timeless favorate!')">Add to Cart</button>
                 </a>
             </div>
             <div class="sliderItem">
                 <img decoding="async" src="./img/imgr7.png" alt="" class="sliderImg" id="jordan">
                 <div class="sliderBg"></div>
+                <div class="value_item"></div>
                 <h1 class="sliderTitle">AIR JORDAN<br> NEW<br> SEASON</h1>
                 <h2 class="sliderPrice">Rs 1149</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
+                    <button class="cartbutton" onclick="addToCart('Jordan', '149','Love the seek style and durable quality.' )">Add to Cart</button>
                 </a>
             </div>
             <div class="sliderItem">
@@ -70,6 +74,7 @@
                 <h2 class="sliderPrice">Rs 2100</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
+                    <button class="cartbutton" onclick="addToCart('Blazer', '210','Blazer is a timeless icon in the sneaker world...!')">Add to Cart</button>
                 </a>
             </div>
             <div class="sliderItem">
@@ -79,12 +84,14 @@
                 <h2 class="sliderPrice">Rs 2999</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
+                    <button class="cartbutton" onclick="addToCart('Creater', '299','Unleash your creativity with every step in these innovative kicks')">Add to Cart</button>
                 </a>
             </div>
             <div class="sliderItem">
                 <img decoding="async" src="./img/img5.png" alt="" class="sliderImg">
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">HIPPIE<br> NEW<br> SEASON</h1>
+                <button class="cartbutton" onclick="addToCart('Hippie', '99','The futuristic look and feel are out of this world dare to be!')">Add to Cart</button>
                 <h2 class="sliderPrice">Rs 999</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
@@ -121,15 +128,14 @@
             <span class="featureDesc">You can Checkout about us.</span>
         </div>
     </div>
-
     <div class="product" id="product">
-        <img decoding="async" src="https://images.footway.com/01/252/25219-01/front/705/705/25219-01.png?fwv=1.0&auto=format,compress" alt="" class="productImg">
+        <img decoding="async" src="./img/img1.png" alt="" class="productImg">
         <div class="productDetails">
             <h1 class="productTitle">AIR FORCE</h1>
             <h2 class="productPrice">Rs 1999</h2>
             <p class="productDesc">Step up your game with the Nike Boys' Athletic Shoe, designed to provide superior comfort, style, and 
                 performance for active boys. Whether for school, sports, or casual wear, these shoes are the perfect choice for 
-                young athletes who demand the best....</p>
+                young athletes who demand the best...</p>
             <div class="colors">
                 <div class="color"></div>
                 <div class="color"></div>
@@ -140,7 +146,7 @@
                 <div class="size">44</div>
             </div>
             <button class="productButton">BUY NOW!</button>
-            <button class="cart-add" onclick="addToCart('AIR FORCE',1999)">Add to Cart</button>
+            <button id="cart-page">Cart</button>
         </div>
         <div class="payment">
             <h1 class="payTitle">Personal Information</h1>
@@ -256,6 +262,13 @@
         </div>
     </footer>
     <script src="./jsfile.js"></script>
+    <script>
+        function addToCart(productName, price,discription) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push({ name: productName, price: price,discript:discription});
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Product added to cart');
+        }
+    </script>
 </body>
-
 </html>
