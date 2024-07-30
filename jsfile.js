@@ -223,4 +223,28 @@ function loadVideo(videoId, containerId) {
 function onPlayButtonClick() {
   loadVideo('VIDEO_ID_HERE', 'videoContainerId');
 }
+function handleCheckout() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let lastItem = cart[cart.length - 1];
+  const trackingData = {
+      name: lastItem.name,
+      price: lastItem.price,
+      description: lastItem.description,
+      status: 'Processing',
+      estimatedDelivery: calculateEstimatedDelivery()
+  };
+  
+  localStorage.setItem('trackingData', JSON.stringify(trackingData));
+  window.alert("Order placed successfully")
+}
 
+function calculateEstimatedDelivery() {
+  let today = new Date();
+  today.setDate(today.getDate() + 7);
+  return today.toDateString();
+}
+
+const orders_btn = document.querySelector('#orders');
+orders_btn.addEventListener('click',()=>{
+  window.open("./orders/tracking.html")
+});
