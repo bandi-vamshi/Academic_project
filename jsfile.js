@@ -6,7 +6,7 @@ const products = [
   {
     id: 1,
     title: "Air Force",
-    price: 119,
+    price: 1999,
     colors: [
       {
         code: "white",
@@ -21,7 +21,7 @@ const products = [
   {
     id: 2,
     title: "Air Jordan",
-    price: 149,
+    price: 1149,
     colors: [
       {
         code: "red",
@@ -36,7 +36,7 @@ const products = [
   {
     id: 3,
     title: "Blazer",
-    price: 109,
+    price: 2100,
     colors: [
       {
         code: "black",
@@ -51,7 +51,7 @@ const products = [
   {
     id: 4,
     title: "Crater",
-    price: 129,
+    price: 2999,
     colors: [
       {
         code: "black",
@@ -67,7 +67,7 @@ const products = [
   {
     id: 5,
     title: "Hippie",
-    price: 99,
+    price: 1599,
     colors: [
       {
         code: "brown",
@@ -99,7 +99,7 @@ menuItems.forEach((item, index) => {
 
 
     currentProductTitle.textContent = choosenProduct.title;
-    currentProductPrice.textContent = "$" + choosenProduct.price;
+    currentProductPrice.textContent =  choosenProduct.price;
     currentProductImg.src = choosenProduct.colors[0].img;
 
 
@@ -165,3 +165,62 @@ products.forEach(values=>{
 }
 }
 )
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.querySelector('.searchInput');
+  const products = document.querySelectorAll('.sliderItem');
+  const suggestionsBox = document.querySelector('.suggestions');
+  const searchIcon = document.querySelector('.searchIcon');
+
+  function searchProduct(query) {
+      const matchedProduct = Array.from(products).find(product => {
+          const productName = product.dataset.productName.toLowerCase();
+          return productName.includes(query.toLowerCase());
+      });
+
+      if (matchedProduct) {
+          matchedProduct.scrollIntoView({ behavior: 'smooth' });
+          matchedProduct.style.border = '2px solid #ff0000';
+          setTimeout(() => {
+              matchedProduct.style.border = 'none';
+          }, 2000);
+      } else {
+          alert('Product not found');
+      }
+  }
+
+  searchInput.addEventListener('input', function () {
+      const query = searchInput.value.toLowerCase().trim();
+      if (query) {
+          const suggestions = Array.from(products)
+              .map(product => product.dataset.productName)
+              .filter(productName => productName.toLowerCase().includes(query));
+          displaySuggestions(suggestions);
+      } else {
+          suggestionsBox.innerHTML = '';
+      }
+  });
+
+  searchIcon.addEventListener('click', function () {
+      const query = searchInput.value.toLowerCase().trim();
+      if (query) {
+          searchProduct(query);
+      }
+  });
+});
+
+function loadVideo(videoId, containerId) {
+  var container = document.getElementById(containerId);
+  var iframe = document.createElement('iframe');
+  iframe.width = '560';
+  iframe.height = '315';
+  iframe.src = `https://www.youtube.com/embed/${videoId}`;
+  iframe.frameBorder = '0';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  container.innerHTML = '';
+  container.appendChild(iframe);
+}
+function onPlayButtonClick() {
+  loadVideo('VIDEO_ID_HERE', 'videoContainerId');
+}
+

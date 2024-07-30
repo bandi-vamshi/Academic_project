@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>My Shopping Cart</h1>
+        <h1>Shopping Cart</h1>
     </header>
     <main>
         <section class="cart-container">
@@ -18,24 +18,33 @@
             </div>
             <div class="cart-items" id="cart-items"></div>
             <div class="cart-total">
-                <h3>Total: $<span id="total-price">0.00</span></h3>
+                <h3>Total: Rs.<span id="total-price">0.00</span></h3>
+                <button id="checkout-button">Checkout</button>
             </div>
         </section>
     </main>
-    <script src="car.js"></script>
     <script>
+
+        function addToCart(productName, price, description, imgUrl) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name: productName, price: price, description: description, img12: imgUrl });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Product added to cart');
+        }
         function displayCart() {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             let cartItemsDiv = document.getElementById('cart-items');
             let totalPrice = 0;
-
+        
             if (cart.length === 0) {
                 cartItemsDiv.innerHTML = '<p>Your cart is empty</p>';
             } else {
                 let items = '';
                 cart.forEach((item, index) => {
-                    items += `<div>
-                        <p>${item.name} - $${item.price}</p><p>${item.discript}</p>
+                    items += `<div class="cart-item">
+                        <img decoding="async" src="${item.img12}" alt="${item.name}" class="cart-item-img">
+                        <p>${item.name} - Rs ${item.price}</p>
+                        <p>${item.description}</p>
                         <button onclick="removeFromCart(${index})">Remove</button>
                     </div>`;
                     totalPrice += parseFloat(item.price);
@@ -44,20 +53,24 @@
             }
             document.getElementById('total-price').innerText = totalPrice.toFixed(2);
         }
-
+        
         function removeFromCart(index) {
             let cart = JSON.parse(localStorage.getItem('cart'));
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
             displayCart();
         }
-
+        
         document.getElementById('clear-cart').addEventListener('click', () => {
             localStorage.removeItem('cart');
             displayCart();
         });
-
+        
         window.onload = displayCart;
+        document.getElementById('checkout-button').addEventListener('click', () => {
+            alert('Proceeding to checkout');
+        });
+        
     </script>
 </body>
 </html>

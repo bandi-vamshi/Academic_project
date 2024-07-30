@@ -46,17 +46,17 @@
     
     <div class="slider">
         <div class="sliderWrapper">
-            <div class="sliderItem">
+            <div class="sliderItem" data-product-name="Air Force">
                 <img decoding="async" src="./img/img1.png" alt="" class="sliderImg" id="firsts">
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">AIR FORCE<br> NEW<br> SEASON</h1>
                 <h2 class="sliderPrice">Rs.1999</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
-                    <button class="cartbutton" onclick="addToCart('Air Force', '119','Classic style, comfortable fit-a timeless favorate!')">Add to Cart</button>
+                    <button class="cartbutton" id="add-to-car" onclick="addToCart('Air Force', '1999','Classic style, comfortable fit-a timeless favorate!','../img/img1.png')">Add to Cart</button>
                 </a>
             </div>
-            <div class="sliderItem">
+            <div class="sliderItem" data-product-name="Air Jordan">
                 <img decoding="async" src="./img/imgr7.png" alt="" class="sliderImg" id="jordan">
                 <div class="sliderBg"></div>
                 <div class="value_item"></div>
@@ -64,35 +64,35 @@
                 <h2 class="sliderPrice">Rs 1149</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
-                    <button class="cartbutton" onclick="addToCart('Jordan', '149','Love the seek style and durable quality.' )">Add to Cart</button>
+                    <button class="cartbutton" id="add-to-car" onclick="addToCart('Air Jordan', '1149','Love the seek style and durable quality.','../img/imgr7.png' )">Add to Cart</button>
                 </a>
             </div>
-            <div class="sliderItem">
+            <div class="sliderItem" data-product-name="Blazer">
                 <img decoding="async" src="./img/img3.png" alt="" class="sliderImg" id="thirds">
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">BLAZER<br> NEW<br> SEASON</h1>
                 <h2 class="sliderPrice">Rs 2100</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
-                    <button class="cartbutton" onclick="addToCart('Blazer', '210','Blazer is a timeless icon in the sneaker world...!')">Add to Cart</button>
+                    <button class="cartbutton" id="add-to-car" onclick="addToCart('Blazer', '2100','Blazer is a timeless icon in the sneaker world...!','../img/img3.png')">Add to Cart</button>
                 </a>
             </div>
-            <div class="sliderItem">
+            <div class="sliderItem" data-product-name="Crater">
                 <img decoding="async" src="./img/img4.png" alt="" class="sliderImg" id="crater">
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">CRATER<br> NEW<br> SEASON</h1>
                 <h2 class="sliderPrice">Rs 2999</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
-                    <button class="cartbutton" onclick="addToCart('Creater', '299','Unleash your creativity with every step in these innovative kicks')">Add to Cart</button>
+                    <button class="cartbutton" id="add-to-car" onclick="addToCart('Creater', '2999','Unleash your creativity with every step in these innovative kicks','../img/img4.png')">Add to Cart</button>
                 </a>
             </div>
-            <div class="sliderItem">
+            <div class="sliderItem" data-product-name="Hippie">
                 <img decoding="async" src="./img/img5.png" alt="" class="sliderImg">
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">HIPPIE<br> NEW<br> SEASON</h1>
-                <button class="cartbutton" onclick="addToCart('Hippie', '99','The futuristic look and feel are out of this world dare to be!')">Add to Cart</button>
-                <h2 class="sliderPrice">Rs 999</h2>
+                <button class="cartbutton" id="add-to-car" onclick="addToCart('Hippie', '1599','The futuristic look and feel are out of this world dare to be!','../img/img5.png')">Add to Cart</button>
+                <h2 class="sliderPrice">Rs 1599</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
                 </a>
@@ -103,7 +103,7 @@
     <div class="features">
         <div class="feature">
             <img decoding="async" src="https://pngimg.com/uploads/free_shipping/free_shipping_PNG40.png" alt="" class="featureIcon">
-            <button class="featureTitle">FREE SHIPPING</button>
+            <button class="featureTitle" id="orders">ORDERS</button>
             <span class="featureDesc">Free worldwide shipping on all orders.</span>
         </div>
         <div class="feature">
@@ -167,7 +167,7 @@
                 <input type="text" placeholder="yyyy" class="payInput sm">
                 <input type="text" placeholder="cvv" class="payInput sm">
             </div>
-            <button class="payButton">Checkout!</button>
+            <button class="payButton" onclick="handleCheckout()">Checkout!</button>
             <span class="close">X</span>
         </div>
     </div>
@@ -200,6 +200,9 @@
             <a href="#nav">
                 <button class="nsButton">CHOOSE YOUR STYLE</button>
             </a>
+                <div id="videoContainerId" class="video-container"></div>
+                <button onclick="onPlayButtonClick()">Play Video</button>
+
         </div>
         <div class="nsItem">
             <img decoding="async" src="https://images.pexels.com/photos/7856965/pexels-photo-7856965.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
@@ -262,13 +265,13 @@
         </div>
     </footer>
     <script src="./jsfile.js"></script>
+    <script src="./cartpage/cart.js"></script>
     <script>
-        function addToCart(productName, price,discription) {
+        function addToCart(productName, price, description, imgUrl) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cart.push({ name: productName, price: price,discript:discription});
+            cart.push({ name: productName, price: price, description: description, img12: imgUrl });
             localStorage.setItem('cart', JSON.stringify(cart));
-            alert('Product added to cart');
-        }
+            }
     </script>
 </body>
 </html>
