@@ -248,3 +248,8 @@ const orders_btn = document.querySelector('#orders');
 orders_btn.addEventListener('click',()=>{
   window.open("./orders/tracking.html")
 });
+
+const review_btn = document.querySelector('.reviewbutton');
+review_btn.addEventListener('click',()=>{
+  window.open("./Reviews/review.html")
+});

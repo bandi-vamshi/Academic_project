@@ -33,10 +33,6 @@ function signUp() {
     console.log('User signed up:', user);
     alert('Sign up successful!');
 }
-
-
-
-
 function signIn() {
     var enteredemail = document.getElementById('email').value;
     var enteredPassword = document.getElementById('password').value;
