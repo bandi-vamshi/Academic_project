@@ -108,14 +108,6 @@ menuItems.forEach((item, index) => {
     });
   });
 });
-currentProductColors.forEach((color, index) => {
-  color.addEventListener("click", () => {
-    currentProductImg.src = choosenProduct.colors[index].img;
-    cart_add.addEventListener("onclick",()=>{
-    addToCart(choosenProduct.title,choosenProduct.price)
-  });
-  });
-});
 
 currentProductSizes.forEach((size, index) => {
   size.addEventListener("click", () => {
@@ -235,7 +227,15 @@ function handleCheckout() {
   };
   
   localStorage.setItem('trackingData', JSON.stringify(trackingData));
+  
   window.alert("Order placed successfully")
+  let history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    history.push({
+        ...trackingData,
+        timestamp: new Date().toISOString()
+    });
+    localStorage.setItem('orderHistory', JSON.stringify(history));
+    window.location.href = 'index.html';
 }
 
 function calculateEstimatedDelivery() {

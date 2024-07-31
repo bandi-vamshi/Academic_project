@@ -166,6 +166,50 @@ html {
     background-color: white;
     color: black;
   }
+
+  /* Basic styles for the color and size boxes */
+.colors, .sizes {
+  display: flex;
+  gap: 10px; /* Space between items */
+}
+
+.color, .size {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Style for color boxes */
+.color {
+  background-color: lightgray; /* Default color */
+}
+
+/* Style for size boxes */
+.size {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Hover effect for color boxes */
+.color:hover {
+  transform: scale(1.1); /* Slightly enlarge the box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+/* Hover effect for size boxes */
+.size:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+  border-color: #333; /* Change border color on hover */
+  transform: scale(1.1); /* Slightly enlarge the box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
   
   .sliderItem:nth-child(1) .sliderBg {
     background-color: #e283ce;
