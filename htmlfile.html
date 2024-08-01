@@ -109,8 +109,8 @@
         </div>
         <div class="feature">
             <img decoding="async" class="featureIcon" src="https://cdn-icons-png.flaticon.com/512/211/211325.png" alt="">
-            <button class="featureTitle">30 DAYS RETURN</button>
-            <span class="featureDesc">No question return and easy refund in 14 days.</span>
+            <button class="featureTitle" id="history">History of Orders</button>
+            <span class="featureDesc">Easily keep track of all your orders, view the status of each item.</span>
         </div>
         <div class="feature">
             <img decoding="async" class="featureIcon" src="https://banner.freeholidaypng.com/20191029/fis/gift-green-for-christmas-5db78a9a6f8924.36066380.png" alt="">
@@ -273,48 +273,61 @@
     <script src="./cartpage/cart.js"></script>
     <script>
         const stripe = Stripe('your_stripe_publishable_key_here');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
 
-async function handleCheckout() {
-    const response = await fetch('http://localhost:3000/create-payment-intent', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: 1999 }),
-    });
+        async function handleCheckout() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
 
-    const { clientSecret } = await response.json();
-
-    const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: elements.getElement(CardElement),
-            billing_details: {
-                name: 'Vamshi Bandi',
-                phone: '+91 1234567890',
-                address: {
-                    line1: 'hanamakonda, telangana 506142',
+            const response = await fetch('http://localhost:3000/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
                 },
-            },
-        },
-    });
+                body: JSON.stringify({ amount: 1999 }),
+            });
 
-    if (result.error) {
-        console.error(result.error.message);
-    } else {
-        if (result.paymentIntent.status === 'succeeded') {
-            alert('Payment successful!');
+            const { clientSecret } = await response.json();
+
+            const result = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: name,
+                        phone: phone,
+                        address: {
+                            line1: address,
+                        },
+                    },
+                },
+            });
+
+            if (result.error) {
+                console.error(result.error.message);
+                
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    alert('Payment successful! Your order has been placed.');
+                    clearCheckoutForm();
+                }
+            }
         }
-    }
-}
-const elements = stripe.elements();
-const cardElement = elements.create('card');
-cardElement.mount('#card-element');
+
+        function clearCheckoutForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('address').value = '';
+            cardElement.clear();
+        }
 
         function addToCart(productName, price, description, imgUrl) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.push({ name: productName, price: price, description: description, img12: imgUrl });
             localStorage.setItem('cart', JSON.stringify(cart));
-            }
+        }
     </script>
 </body>
 </html>

@@ -149,11 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Product not found');
     }
   }
-
-  function displaySuggestions(suggestions) {
-    suggestionsBox.innerHTML = suggestions.map(suggestion => `<div class="suggestion">${suggestion}</div>`).join('');
-  }
-
   searchInput.addEventListener('input', () => {
     const query = searchInput.value.toLowerCase().trim();
     if (query) {
@@ -234,3 +229,19 @@ const review_btn = document.querySelector('.reviewbutton');
 review_btn.addEventListener('click', () => {
   window.open("./Reviews/review.html");
 });
+
+const history_btn = document.querySelector('#history');
+history_btn.addEventListener('click', () => {
+  window.open("./history/history.html");
+});
+
+document.getElementById('checkout-button').addEventListener('click', handlee);
+
+function handlee() {
+    document.querySelectorAll('.payInput').forEach(input => {
+        input.value = '';
+    });
+
+    document.getElementById('card-element').innerHTML = '';
+    alert("Order placed successfully!")
+}

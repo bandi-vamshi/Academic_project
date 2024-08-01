@@ -21,7 +21,7 @@ app.post('/create-payment-intent', async (req, res) => {
 
     try {
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: amount,
+            amount: amount * 100, // convert to cents if using USD
             currency: 'usd',
         });
 
@@ -44,6 +44,7 @@ app.post('/checkout', (req, res) => {
 
     res.status(200).json({ message: 'Checkout successful' });
 });
+
 app.get('/cart', (req, res) => {
     const cart = req.session.cart || [];
     res.json(cart);
