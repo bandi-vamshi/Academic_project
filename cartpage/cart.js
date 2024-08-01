@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
   const cartItemsContainer = document.getElementById('cart-items');
   const totalPriceElement = document.getElementById('total-price');
@@ -53,11 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
       totalPriceElement.textContent = totalPrice.toFixed(2);
   }
-  clearCartButton.addEventListener('click', () => {
-      cart = [];
-      renderCartItems();
-      updateTotalPrice();
-  });
 });
 
 function displayCart() {
@@ -93,7 +87,3 @@ function clearCart() {
   localStorage.removeItem('cart');
   displayCart();
 }
-
-document.getElementById('clear-cart').addEventListener('click', clearCart);
-
-window.onload = displayCart;
