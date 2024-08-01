@@ -53,9 +53,3 @@ function signIn() {
         alert('No user found. Please sign up first.');
     }
 }
-
-
-
-
-
-

@@ -83,7 +83,15 @@ html {
     justify-content: center;
     position: relative;
   }
-  
+  .sliderItem:hover {
+    width: 102vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    size: 10vw;
+    color: black;
+  }
   .sliderBg {
     width: 750px;
     height: 750px;
@@ -880,14 +888,60 @@ button:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+.colors, .sizes {
+  display: flex;
+  gap: 10px;
+}
 
+.color, .size {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.color {
+  background-color: lightgray;
+}
+
+.size {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.color:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.size:hover {
+  background-color: #f0f0f0;
+  border-color: #333;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
 .reviewbutton {
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  float: right;
+  padding: 10px 20px;
+  background-color: rgb(62, 86, 89);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .reviewbutton:hover {
-  background-color: #333;
-  color: #fff;
-  transform: scale(1.1);
+  background-color: rgb(105, 113, 116);
+  color: white;
+  float: right;
+  padding: 9px 18px;
+  font-weight: 550;
+  position: obsolute;
+  cursor: pointer;
 }
+
