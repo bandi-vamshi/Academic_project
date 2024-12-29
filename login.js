@@ -45,14 +45,11 @@ async function signIn() {
   alert(result.message);
 
   if (response.ok) {
-    // Redirect to home page after successful login
-    window.location.href = result.redirectTo; // Redirect to the path specified by server
+    window.location.href = result.redirectTo;
 
-    // Clear the fields after sign in
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
   } else {
-    // Show error message if login failed
     alert(result.message);
   }
 }
