@@ -1,55 +1,58 @@
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
-const login_btn = document.querySelector("#nav")
+const login_btn = document.querySelector("#nav");
 
-sign_up_btn.addEventListener('click', () =>{
-    container.classList.add("sign-up-mode");
+sign_up_btn.addEventListener("click", () => {
+  container.classList.add("sign-up-mode");
 });
 
-sign_in_btn.addEventListener('click', () =>{
-    container.classList.remove("sign-up-mode");
+sign_in_btn.addEventListener("click", () => {
+  container.classList.remove("sign-up-mode");
 });
 
-let infodetails=[];
-function signUp() {
-    var username = document.getElementById('sign-user').value;
-    var password = document.getElementById('sign-pwd').value;
-    var email = document.getElementById('sign-email').value;
+async function signUp() {
+  const username = document.getElementById("sign-user").value;
+  const email = document.getElementById("sign-email").value;
+  const password = document.getElementById("sign-pwd").value;
 
-    var user = {
-        user: username,
-        pwd: password,
-        mail: email
-    };
-    
-    infodetails.push(user);
-    for (x of infodetails)
-        console.log(x)
+  const response = await fetch("http://localhost:3000/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, email, password }),
+  });
 
-    localStorage.setItem('user', JSON.stringify(user));
+  const result = await response.json();
+  alert(result.message);
 
-    console.log(user)
-    console.log('User signed up:', user);
-    alert('Sign up successful!');
+  // Clear the fields after signup
+  document.getElementById("sign-user").value = "";
+  document.getElementById("sign-email").value = "";
+  document.getElementById("sign-pwd").value = "";
 }
-function signIn() {
-    var enteredemail = document.getElementById('email').value;
-    var enteredPassword = document.getElementById('password').value;
 
-    var storedUser = JSON.parse(localStorage.getItem('user'));
+async function signIn() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    if (storedUser) {
-        if (storedUser.mail == enteredemail && storedUser.pwd == enteredPassword) {
-            console.log('Sign in successful');
-            alert('Sign in successful!');
-            window.open("htmlfile.html");
-        } else {
-            console.log('Invalid username or password');
-            alert('Invalid username or password');
-        }
-    } else {
-        console.log('No user found. Please sign up first.');
-        alert('No user found. Please sign up first.');
-    }
+  const response = await fetch("http://localhost:3000/signin", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const result = await response.json();
+  alert(result.message);
+
+  if (response.ok) {
+    // Redirect to home page after successful login
+    window.location.href = result.redirectTo; // Redirect to the path specified by server
+
+    // Clear the fields after sign in
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+  } else {
+    // Show error message if login failed
+    alert(result.message);
+  }
 }

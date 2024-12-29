@@ -62,7 +62,7 @@
                 <div class="sliderBg"></div>
                 <div class="value_item"></div>
                 <h1 class="sliderTitle">AIR JORDAN<br> NEW<br> SEASON</h1>
-                <h2 class="sliderPrice">Rs 1149</h2>
+                <h2 class="sliderPrice">Rs.1149</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
                     <button class="cartbutton" id="add-to-car" onclick="addToCart('Air Jordan', '1149','Love the seek style and durable quality.','../img/imgr7.png' )">Add to Cart</button>
@@ -72,7 +72,7 @@
                 <img decoding="async" src="./img/img3.png" alt="" class="sliderImg" id="thirds">
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">BLAZER<br> NEW<br> SEASON</h1>
-                <h2 class="sliderPrice">Rs 2100</h2>
+                <h2 class="sliderPrice">Rs.2100</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
                     <button class="cartbutton" id="add-to-car" onclick="addToCart('Blazer', '2100','Blazer is a timeless icon in the sneaker world...!','../img/img3.png')">Add to Cart</button>
@@ -82,7 +82,7 @@
                 <img decoding="async" src="./img/img4.png" alt="" class="sliderImg" id="crater">
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">CRATER<br> NEW<br> SEASON</h1>
-                <h2 class="sliderPrice">Rs 2999</h2>
+                <h2 class="sliderPrice">Rs.2999</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
                     <button class="cartbutton" id="add-to-car" onclick="addToCart('Creater', '2999','Unleash your creativity with every step in these innovative kicks','../img/img4.png')">Add to Cart</button>
@@ -93,7 +93,7 @@
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">HIPPIE<br> NEW<br> SEASON</h1>
                 <button class="cartbutton" id="add-to-car" onclick="addToCart('Hippie', '1599','The futuristic look and feel are out of this world dare to be!','../img/img5.png')">Add to Cart</button>
-                <h2 class="sliderPrice">Rs 1599</h2>
+                <h2 class="sliderPrice">Rs.1599</h2>
                 <a href="#product">
                     <button class="buyButton">BUY NOW!</button>
                 </a>
@@ -153,27 +153,32 @@
         </div>
         <div class="payment">
             <h1 class="payTitle">Personal Information</h1>
-            <label>Name and Surname</label>
-            <input type="text" placeholder="vamshi bandi" class="payInput">
-            <label>Phone Number</label>
-            <input type="text" placeholder="+91 1234567890" class="payInput">
-            <label>Address</label>
-            <input type="text" placeholder="hanamakonda,telangana 506142" class="payInput">
+            <label for="name">Name and Surname</label>
+            <input type="text" id="name" placeholder="John Doe" class="payInput" required>
+        
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" placeholder="+1 234 567 890" class="payInput" required>
+        
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="123 Main Street, City, Country" class="payInput" required>
+            
             <h1 class="payTitle">Card Information</h1>
             <div class="cardIcons">
-                <img decoding="async" src="./img/visacard.png" width="40" alt="" class="cardIcon">
-                <img decoding="async" src="./img/credit.png" alt="" width="40" class="cardIcon">
+                <img src="./img/visacard.png" width="40" alt="Visa Card" class="cardIcon">
+                <img src="./img/credit.png" width="40" alt="Credit Card" class="cardIcon">
             </div>
-            <input type="password" class="payInput" placeholder="Card Number">
+            
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" class="payInput" placeholder="Card Number" required>
+        
             <div class="cardInfo">
-                <input type="text" placeholder="mm" class="payInput sm">
-                <input type="text" placeholder="yyyy" class="payInput sm">
-                <input type="text" placeholder="cvv" class="payInput sm">
+                <input type="text" id="expiryMonth" placeholder="MM" class="payInput sm" required>
+                <input type="text" id="expiryYear" placeholder="YYYY" class="payInput sm" required>
+                <input type="text" id="cvv" placeholder="CVV" class="payInput sm" required>
             </div>
-            <div id="card-element">
-            </div>
+        
             <button id="checkout-button" onclick="handleCheckout()" class="payButton">Checkout!</button>
-            <span class="close">X</span>
+            <span class="close" onclick="closeForm()">X</span>
         </div>
     </div>
     <div class="gallery">
@@ -272,50 +277,59 @@
     <script src="./jsfile.js"></script>
     <script src="./cartpage/cart.js"></script>
     <script>
-        const stripe = Stripe('your_stripe_publishable_key_here');
-        const elements = stripe.elements();
-        const cardElement = elements.create('card');
-        cardElement.mount('#card-element');
-
-        async function handleCheckout() {
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-
-            const response = await fetch('http://localhost:3000/create-payment-intent', {
+        function handleCheckout() {
+            // Collect user input from the form fields
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+            const cardNumber = document.getElementById("cardNumber").value;
+            const expiryMonth = document.getElementById("expiryMonth").value;
+            const expiryYear = document.getElementById("expiryYear").value;
+            const cvv = document.getElementById("cvv").value;
+    
+            // Create an object with the collected data
+            const orderData = {
+                name,
+                phone,
+                address,
+                cardNumber,
+                expiryMonth,
+                expiryYear,
+                cvv
+            };
+    
+            // Send the data to the server using the Fetch API
+            fetch('http://localhost:4000/checkout', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ amount: 1999 }),
-            });
-
-            const { clientSecret } = await response.json();
-
-            const result = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: cardElement,
-                    billing_details: {
-                        name: name,
-                        phone: phone,
-                        address: {
-                            line1: address,
-                        },
-                    },
-                },
-            });
-
-            if (result.error) {
-                console.error(result.error.message);
-                
-            } else {
-                if (result.paymentIntent.status === 'succeeded') {
-                    alert('Payment successful! Your order has been placed.');
-                    clearCheckoutForm();
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Order placed successfully!');
+                    // Clear the form fields after success
+                    document.querySelectorAll(".payInput").forEach(input => input.value = '');
+                } else {
+                    alert('Error placing the order. Please try again.');
                 }
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error occurred. Please try again later.');
+            });
         }
-
+    
+        // Function to close the form (optional)
+        function closeForm() {
+            // Close the form or redirect if needed
+            window.location.href = 'htmlfile.html'; // Redirect to home page or other page
+        }
+    
+          
+          
         function clearCheckoutForm() {
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
